@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservations — Panchratna Fine Dining, Nashik</title>
+  <meta name="description" content="Reserve your table at Panchratna, Nashik. Experience the ₹3,000 Chef's Vegetarian Tasting Menu. Available for lunch and dinner. Book online.">
+  <link rel="icon" href="../assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/reservations.css">
+  <link rel="stylesheet" href="../css/animations.css">
+</head>
+<body>
+
+<div id="cursor-orb"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAVBAR -->
+<nav class="navbar scrolled" id="navbar" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <img src="../assets/images/logo.svg" alt="Panchratna" class="nav-logo-emblem">
+      <div><span class="nav-logo-text">Panchratna</span><span class="nav-logo-sub">Nashik, Maharashtra</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html"     class="nav-link">Home</a></li>
+      <li><a href="about.html"        class="nav-link">Our Story</a></li>
+      <li><a href="menu.html"         class="nav-link">Menu</a></li>
+      <li><a href="gallery.html"      class="nav-link">Gallery</a></li>
+      <li><a href="reservations.html" class="nav-link active">Reservations</a></li>
+    </ul>
+    <a href="reservations.html" class="btn-reserve-nav" style="pointer-events:none;opacity:0.5;">Reserve a Table</a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-mobile-menu" id="mobile-menu">
+  <a href="../index.html"     class="nav-link">Home</a>
+  <a href="about.html"        class="nav-link">Our Story</a>
+  <a href="menu.html"         class="nav-link">Menu</a>
+  <a href="gallery.html"      class="nav-link">Gallery</a>
+  <a href="reservations.html" class="nav-link">Reservations</a>
+</div>
+
+<!-- PAGE HEADER -->
+<header class="page-header" style="min-height:32vh;">
+  <div class="page-header-content">
+    <span class="section-label">Book Your Evening</span>
+    <h1>Reserve a <em>Table</em></h1>
+    <div class="gold-divider"></div>
+    <p style="color:var(--color-muted);font-family:var(--font-display);font-style:italic;font-size:1.05rem;margin-top:0.5rem;">
+      Experience the ₹3,000 Chef's Vegetarian Tasting Menu
+    </p>
+  </div>
+</header>
+
+<main class="reservations-page" id="main-content">
+  <div class="reservations-layout" style="padding-top:var(--space-lg);padding-bottom:var(--space-xl);">
+
+    <!-- Booking Form -->
+    <section aria-labelledby="booking-heading">
+      <div class="booking-card">
+        <div class="booking-card-header">
+          <h2 id="booking-heading">Make a <em>Reservation</em></h2>
+          <p class="booking-card-subtitle">All fields marked <span style="color:var(--color-gold)">*</span> are required</p>
+        </div>
+
+        <form class="booking-form" id="reservation-form" novalidate aria-label="Table reservation form">
+
+          <!-- Hidden party size value -->
+          <input type="hidden" id="party-size-value" name="party_size">
+
+          <!-- Name -->
+          <div class="form-group">
+            <label class="form-label" for="res-name">Full Name <span class="required">*</span></label>
+            <input
+              type="text"
+              id="res-name"
+              name="name"
+              class="form-input"
+              placeholder="Your full name"
+              autocomplete="name"
+              required
+            >
+            <span class="form-error-msg" role="alert">Please enter your full name.</span>
+          </div>
+
+          <!-- Email -->
+          <div class="form-group">
+            <label class="form-label" for="res-email">Email Address <span class="required">*</span></label>
+            <input
+              type="email"
+              id="res-email"
+              name="email"
+              class="form-input"
+              placeholder="your@email.com"
+              autocomplete="email"
+              required
+            >
+            <span class="form-error-msg" role="alert">Please enter a valid email.</span>
+          </div>
+
+          <!-- Phone -->
+          <div class="form-group">
+            <label class="form-label" for="res-phone">Phone Number <span class="required">*</span></label>
+            <input
+              type="tel"
+              id="res-phone"
+              name="phone"
+              class="form-input"
+              placeholder="+91 XXXXX XXXXX"
+              autocomplete="tel"
+              required
+            >
+            <span class="form-error-msg" role="alert">Please enter a valid phone number.</span>
+          </div>
+
+          <!-- Date -->
+          <div class="form-group">
+            <label class="form-label" for="res-date">Preferred Date <span class="required">*</span></label>
+            <input
+              type="date"
+              id="res-date"
+              name="date"
+              class="form-input"
+              required
+            >
+            <span class="form-error-msg" role="alert">Please select a future date.</span>
+          </div>
+
+          <!-- Time -->
+          <div class="form-group">
+            <label class="form-label" for="res-time">Preferred Time <span class="required">*</span></label>
+            <div class="form-select-wrapper">
+              <select id="res-time" name="time" class="form-select" required>
+                <option value="">Select time slot</option>
+                <optgroup label="🌞 Lunch">
+                  <option value="12:00">12:00 PM</option>
+                  <option value="12:30">12:30 PM</option>
+                  <option value="13:00">1:00 PM</option>
+                  <option value="13:30">1:30 PM</option>
+                  <option value="14:00">2:00 PM</option>
+                  <option value="14:30">2:30 PM</option>
+                </optgroup>
+                <optgroup label="🌙 Dinner">
+                  <option value="19:00">7:00 PM</option>
+                  <option value="19:30">7:30 PM</option>
+                  <option value="20:00">8:00 PM</option>
+                  <option value="20:30">8:30 PM</option>
+                  <option value="21:00">9:00 PM</option>
+                  <option value="21:30">9:30 PM</option>
+                </optgroup>
+              </select>
+            </div>
+            <span class="form-error-msg" role="alert">Please select a time slot.</span>
+          </div>
+
+          <!-- Party Size -->
+          <div class="form-group full-width">
+            <label class="form-label">Party Size <span class="required">*</span></label>
+            <div class="party-size-selector" role="group" aria-label="Select number of guests">
+              <button type="button" class="party-size-btn" data-size="1"  id="party-1"  aria-label="1 guest">1</button>
+              <button type="button" class="party-size-btn" data-size="2"  id="party-2"  aria-label="2 guests">2</button>
+              <button type="button" class="party-size-btn" data-size="3"  id="party-3"  aria-label="3 guests">3</button>
+              <button type="button" class="party-size-btn" data-size="4"  id="party-4"  aria-label="4 guests">4</button>
+              <button type="button" class="party-size-btn" data-size="5"  id="party-5"  aria-label="5 guests">5</button>
+              <button type="button" class="party-size-btn" data-size="6"  id="party-6"  aria-label="6 guests">6</button>
+              <button type="button" class="party-size-btn" data-size="7"  id="party-7"  aria-label="7 guests">7</button>
+              <button type="button" class="party-size-btn" data-size="8"  id="party-8"  aria-label="8 guests">8</button>
+              <button type="button" class="party-size-btn" data-size="10" id="party-10" aria-label="10 guests">10+</button>
+            </div>
+            <span class="form-error-msg" role="alert">Please select party size.</span>
+          </div>
+
+          <!-- Special Requests -->
+          <div class="form-group full-width">
+            <label class="form-label" for="res-requests">Special Requests</label>
+            <textarea
+              id="res-requests"
+              name="requests"
+              class="form-textarea"
+              placeholder="Anniversary arrangements, allergy notes, seating preferences..."
+            ></textarea>
+          </div>
+
+          <!-- Occasion -->
+          <div class="form-group">
+            <label class="form-label" for="res-occasion">Occasion</label>
+            <div class="form-select-wrapper">
+              <select id="res-occasion" name="occasion" class="form-select">
+                <option value="">Select occasion (optional)</option>
+                <option value="anniversary">Anniversary 💑</option>
+                <option value="birthday">Birthday 🎂</option>
+                <option value="proposal">Proposal 💍</option>
+                <option value="business">Business Dinner 🤝</option>
+                <option value="celebration">Celebration 🥂</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- How did you hear -->
+          <div class="form-group">
+            <label class="form-label" for="res-source">How did you hear about us?</label>
+            <div class="form-select-wrapper">
+              <select id="res-source" name="source" class="form-select">
+                <option value="">Select (optional)</option>
+                <option value="google">Google Search</option>
+                <option value="instagram">Instagram</option>
+                <option value="friend">Friend / Family</option>
+                <option value="hotel">Hotel Concierge</option>
+                <option value="magazine">Magazine / Blog</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Terms -->
+          <div class="form-group full-width">
+            <div class="form-checkbox-group">
+              <input type="checkbox" id="res-terms" name="terms" class="form-checkbox" required>
+              <label class="form-checkbox-label" for="res-terms">
+                I agree to the <a href="#">Reservation Policy</a> and understand that a confirmation will be sent to my email. Panchratna requests 24 hours notice for cancellations.
+              </label>
+            </div>
+          </div>
+
+          <!-- Submit -->
+          <div class="booking-submit-area">
+            <button type="submit" class="btn-primary" id="submit-btn">
+              Confirm Reservation
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            </button>
+            <p class="booking-submit-note">
+              Reservations are subject to availability. For groups of 10+, please call directly.
+            </p>
+          </div>
+
+        </form>
+      </div>
+    </section>
+
+    <!-- Sidebar -->
+    <aside class="reservations-sidebar" aria-label="Reservation information">
+
+      <!-- Menu Info -->
+      <div class="sidebar-card">
+        <h3>🍽️ Chef's Tasting Menu</h3>
+        <p style="font-family:var(--font-display);font-size:1.8rem;color:var(--color-gold);font-weight:700;margin-bottom:0.5rem;">₹3,000</p>
+        <p style="font-size:0.78rem;color:var(--color-muted);margin-bottom:1rem;">per person · inclusive of 5 courses</p>
+        <ul>
+          <li>🍲 Soup Course</li>
+          <li>🌿 Appetizer</li>
+          <li>🍛 Main Course Selection</li>
+          <li>🫓 Artisan Breads</li>
+          <li>🍮 Dessert</li>
+        </ul>
+        <p style="margin-top:1rem;font-size:0.78rem;color:var(--color-muted);font-style:italic;font-family:var(--font-display);">
+          All prices subject to applicable taxes.
+        </p>
+      </div>
+
+      <!-- Hours -->
+      <div class="sidebar-card">
+        <h3>🕐 Hours</h3>
+        <ul>
+          <li>
+            <strong style="color:var(--color-ivory);">Lunch</strong><br>
+            Monday – Sunday<br>
+            12:00 PM – 3:30 PM
+          </li>
+          <li style="margin-top:0.8rem;">
+            <strong style="color:var(--color-ivory);">Dinner</strong><br>
+            Monday – Sunday<br>
+            7:00 PM – 11:00 PM
+          </li>
+        </ul>
+      </div>
+
+      <!-- Location -->
+      <div class="sidebar-card">
+        <h3>📍 Location</h3>
+        <p style="margin-bottom:0.8rem;">Nashik, Maharashtra 422001, India</p>
+        <p>Gateway to Maharashtra's wine country — nestled close to the sacred Godavari ghats and the historic Trimbakeshwar temple.</p>
+        <p style="margin-top:0.8rem;">
+          <a href="tel:+912530000000" style="color:var(--color-gold);">+91 253 XXX XXXX</a><br>
+          <a href="mailto:dining@panchratna.in" style="color:var(--color-gold);">dining@panchratna.in</a>
+        </p>
+      </div>
+
+      <!-- Policy -->
+      <div class="sidebar-card">
+        <h3>📋 Reservation Policy</h3>
+        <ul>
+          <li>Complimentary cancellation up to 24 hours before</li>
+          <li>Tables held for 15 minutes past booking time</li>
+          <li>Smart casual or formal dress code</li>
+          <li>Allergy information required at time of booking</li>
+          <li>Private dining available for parties of 10+</li>
+        </ul>
+      </div>
+
+    </aside>
+
+  </div>
+</main>
+
+<!-- Toast Notification -->
+<div id="toast" class="toast" role="alert" aria-live="polite">
+  <div class="toast-icon">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+  <div class="toast-body">
+    <div class="toast-title">Reservation Confirmed!</div>
+    <div class="toast-message">Your table has been reserved. A confirmation has been sent to your email.</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="../index.html" class="nav-logo" style="margin-bottom:1.2rem;">
+          <img src="../assets/images/logo.svg" alt="Panchratna" class="nav-logo-emblem">
+          <div><span class="nav-logo-text">Panchratna</span><span class="nav-logo-sub">Nashik, Maharashtra</span></div>
+        </a>
+        <p>Where Mughal grandeur meets the sacred soul of Nashik.</p>
+      </div>
+      <nav class="footer-col" aria-label="Footer navigation">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="about.html">Our Story</a></li>
+          <li><a href="menu.html">Chef's Menu</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="reservations.html">Reservations</a></li>
+        </ul>
+      </nav>
+      <div class="footer-col">
+        <h4>The Menu</h4>
+        <ul>
+          <li><a href="menu.html#course-soup">Soup</a></li>
+          <li><a href="menu.html#course-appetizer">Appetizer</a></li>
+          <li><a href="menu.html#course-main">Main Course</a></li>
+          <li><a href="menu.html#course-breads">Breads</a></li>
+          <li><a href="menu.html#course-dessert">Dessert</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Visit Us</h4>
+        <div class="footer-contact-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Nashik, Maharashtra 422001</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span>+91 253 XXX XXXX</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>Lunch: 12:00 – 15:30<br>Dinner: 19:00 – 23:00</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Panchratna Fine Dining, Nashik. All rights reserved.</p>
+      <span class="footer-tagline">Where Every Meal Tells a Story</span>
+      <p>All prices subject to applicable government taxes.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../lib/gsap.min.js"></script>
+<script src="../lib/ScrollTrigger.min.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/reservations.js"></script>
+<script src="../js/animations.js"></script>
+
+</body>
+</html>

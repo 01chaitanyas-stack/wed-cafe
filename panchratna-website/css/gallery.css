@@ -1,0 +1,272 @@
+/* ================================================
+   PANCHRATNA — GALLERY CSS
+   Masonry grid, 3D hover lift, lightbox overlay
+   ================================================ */
+
+/* ——— Gallery Page ——— */
+.gallery-page {
+  min-height: 100vh;
+  padding-bottom: var(--space-xl);
+}
+
+/* ——— Filter Bar ——— */
+.gallery-filter-bar {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-lg);
+}
+
+.gallery-filter-btn {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--color-glass-border);
+  padding: 0.55rem 1.2rem;
+  border-radius: 20px;
+  cursor: none;
+  transition: all var(--transition-fast);
+}
+
+.gallery-filter-btn:hover,
+.gallery-filter-btn.active {
+  color: var(--color-bg);
+  background: var(--color-gold);
+  border-color: var(--color-gold);
+}
+
+/* ——— Masonry Grid ——— */
+.masonry-grid {
+  column-count: 3;
+  column-gap: 12px;
+  padding: 0 var(--space-md);
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 12px;
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  cursor: none;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
+}
+
+.masonry-item:hover {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.7),
+    0 0 0 1px var(--color-glass-border),
+    inset 0 1px 0 rgba(201,168,76,0.1);
+  z-index: 10;
+}
+
+.masonry-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.6s ease, filter 0.4s ease;
+  border-radius: var(--radius-md);
+}
+
+.masonry-item:hover img {
+  transform: scale(1.04);
+  filter: brightness(0.85);
+}
+
+/* Overlay on hover */
+.masonry-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(13,4,3,0.85) 100%);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: flex-end;
+  padding: 1.2rem;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.masonry-item:hover .masonry-overlay { opacity: 1; }
+
+.masonry-caption {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-ivory);
+}
+
+.masonry-caption small {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  color: var(--color-muted);
+  font-style: normal;
+  letter-spacing: 0.1em;
+}
+
+/* Expand icon */
+.masonry-expand {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  background: rgba(13,4,3,0.7);
+  border: 1px solid var(--color-glass-border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.masonry-item:hover .masonry-expand { opacity: 1; }
+
+.masonry-expand svg {
+  width: 14px;
+  height: 14px;
+  color: var(--color-gold);
+}
+
+/* Placeholder cards for gallery */
+.masonry-placeholder {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--color-gold);
+  opacity: 0.4;
+  background: linear-gradient(135deg, rgba(59,10,10,0.4), rgba(13,4,3,0.8));
+  border-radius: var(--radius-md);
+}
+
+/* ——— Lightbox ——— */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.95);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  backdrop-filter: blur(8px);
+}
+
+.lightbox-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.lightbox-inner {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lightbox-img {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  box-shadow: 0 0 80px rgba(201,168,76,0.2);
+  transform: scale(0.9);
+  transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+
+.lightbox-overlay.active .lightbox-img { transform: scale(1); }
+
+.lightbox-caption {
+  margin-top: 1rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--color-muted);
+  text-align: center;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -48px;
+  right: 0;
+  background: none;
+  border: 1px solid var(--color-glass-border);
+  color: var(--color-ivory);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: none;
+  transition: all var(--transition-fast);
+}
+
+.lightbox-close:hover {
+  background: var(--color-gold);
+  color: var(--color-bg);
+  border-color: var(--color-gold);
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(13,4,3,0.7);
+  border: 1px solid var(--color-glass-border);
+  color: var(--color-ivory);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: none;
+  transition: all var(--transition-fast);
+}
+
+.lightbox-nav:hover { background: var(--color-gold); color: var(--color-bg); border-color: var(--color-gold); }
+.lightbox-prev { left: -60px; }
+.lightbox-next { right: -60px; }
+
+.lightbox-counter {
+  position: absolute;
+  bottom: -36px;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  color: var(--color-muted);
+}
+
+/* ——— Responsive ——— */
+@media (max-width: 1024px) {
+  .masonry-grid { column-count: 2; }
+}
+
+@media (max-width: 768px) {
+  .masonry-grid { column-count: 2; column-gap: 8px; }
+  .masonry-item { margin-bottom: 8px; }
+  .lightbox-prev { left: -40px; }
+  .lightbox-next { right: -40px; }
+}
+
+@media (max-width: 480px) {
+  .masonry-grid { column-count: 1; padding: 0 var(--space-sm); }
+  .lightbox-nav { display: none; }
+  .lightbox-inner { max-width: 95vw; }
+}

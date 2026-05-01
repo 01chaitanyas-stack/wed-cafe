@@ -1,0 +1,673 @@
+/* ================================================
+   PANCHRATNA — DISH MODAL CSS
+   Full-screen luxury dish detail overlay:
+   backdrop, container, header, body panels,
+   3D viewer, nutrition table, ingredient tags,
+   chef note, animations.
+   ================================================ */
+
+/* ═══════════════════════════════════
+   MODAL ROOT
+   ═══════════════════════════════════ */
+.dish-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.dish-modal.is-open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ═══════════════════════════════════
+   BACKDROP
+   ═══════════════════════════════════ */
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(13, 4, 3, 0.94);
+  backdrop-filter: blur(14px) saturate(120%);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
+  cursor: pointer;
+}
+
+/* ═══════════════════════════════════
+   CONTAINER
+   ═══════════════════════════════════ */
+.modal-container {
+  position: relative;
+  width: 92vw;
+  max-width: 1200px;
+  max-height: 92vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: linear-gradient(145deg, #1f0c06 0%, #0D0403 55%, #180e03 100%);
+  border: 1px solid rgba(201, 168, 76, 0.28);
+  border-radius: 6px;
+  box-shadow:
+    0 0 0 1px rgba(201, 168, 76, 0.08),
+    0 40px 120px rgba(0, 0, 0, 0.85),
+    inset 0 1px 0 rgba(201, 168, 76, 0.18);
+  transform: translateY(50px) scale(0.98);
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.4s ease;
+  opacity: 0;
+
+  /* Custom scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: #C9A84C #1a0a06;
+}
+
+.modal-container::-webkit-scrollbar       { width: 5px; }
+.modal-container::-webkit-scrollbar-track { background: #1a0a06; }
+.modal-container::-webkit-scrollbar-thumb { background: #C9A84C; border-radius: 3px; }
+
+.dish-modal.is-open .modal-container {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+/* Top gold line */
+.modal-container::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+}
+
+/* ═══════════════════════════════════
+   CLOSE BUTTON
+   ═══════════════════════════════════ */
+.modal-close {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  z-index: 10;
+  width: 36px;
+  height: 36px;
+  background: rgba(201, 168, 76, 0.08);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  border-radius: 50%;
+  color: var(--color-muted);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: none;
+  transition: all var(--transition-fast);
+  line-height: 1;
+}
+
+.modal-close:hover {
+  background: var(--color-gold);
+  color: var(--color-bg);
+  border-color: var(--color-gold);
+  transform: rotate(90deg);
+}
+
+/* ═══════════════════════════════════
+   HEADER — Dish Identity
+   ═══════════════════════════════════ */
+.modal-header {
+  padding: 2.5rem 2.5rem 1.5rem;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+  position: relative;
+  text-align: center;
+}
+
+.modal-course-tag {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  background: rgba(201, 168, 76, 0.08);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  padding: 0.3rem 1rem;
+  border-radius: 20px;
+  margin-bottom: 1rem;
+}
+
+.modal-dish-name {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  color: var(--color-ivory);
+  line-height: 1.1;
+  margin-bottom: 0.6rem;
+}
+
+.modal-dish-tagline {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+  color: var(--color-muted);
+  max-width: 620px;
+  margin: 0 auto 1.2rem;
+  line-height: 1.6;
+}
+
+.modal-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.modal-meta span {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--color-muted);
+}
+
+.modal-meta .divider { opacity: 0.3; }
+
+.modal-meta .veg-dot {
+  color: #5aab5a;
+  font-weight: 500;
+}
+
+.modal-meta .veg-dot::before {
+  content: '●';
+  font-size: 0.7rem;
+  margin-right: 4px;
+  color: #5aab5a;
+}
+
+/* ═══════════════════════════════════
+   BODY — Three-column layout
+   ═══════════════════════════════════ */
+.modal-body {
+  display: grid;
+  grid-template-columns: 1fr 420px 1fr;
+  gap: 1.5rem;
+  padding: 2rem 2rem 1rem;
+  align-items: start;
+  min-height: 440px;
+}
+
+/* ═══════════════════════════════════
+   PANELS (ingredients + nutrition)
+   ═══════════════════════════════════ */
+.modal-panel {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(201, 168, 76, 0.1);
+  border-radius: 4px;
+  padding: 1.5rem;
+}
+
+.modal-panel h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-gold);
+  letter-spacing: 0.08em;
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.12);
+}
+
+/* ═══════════════════════════════════
+   INGREDIENTS PANEL
+   ═══════════════════════════════════ */
+.ingredient-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1.5rem;
+}
+
+.ingredient-list li {
+  background: rgba(201, 168, 76, 0.07);
+  border: 1px solid rgba(201, 168, 76, 0.18);
+  border-radius: 3px;
+  padding: 5px 10px;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--color-ivory);
+  cursor: default;
+  transition: background 0.2s ease, border-color 0.2s ease,
+              transform 0.15s ease;
+  position: relative;
+}
+
+.ingredient-list li:hover {
+  background: rgba(201, 168, 76, 0.15);
+  border-color: rgba(201, 168, 76, 0.45);
+  transform: translateY(-2px);
+}
+
+.ingredient-list li.has-allergen {
+  border-color: rgba(255, 160, 60, 0.4);
+  color: #FFB060;
+}
+
+.ingredient-list li.has-allergen:hover {
+  background: rgba(255, 160, 60, 0.12);
+  border-color: rgba(255, 160, 60, 0.7);
+}
+
+/* Ingredient note tooltip */
+.ingredient-list li[data-note] {
+  cursor: help;
+}
+
+.ingredient-list li[data-note]::after {
+  content: attr(data-note);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(13, 4, 3, 0.97);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  border-radius: 3px;
+  padding: 5px 10px;
+  font-size: 0.72rem;
+  color: var(--color-muted);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 20;
+}
+
+.ingredient-list li[data-note]:hover::after {
+  opacity: 1;
+}
+
+/* Allergen flags section */
+.allergen-flags {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(201, 168, 76, 0.08);
+}
+
+.allergen-flags h4 {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: 0.75rem;
+}
+
+.allergen-flag-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.allergen-flag-pill {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  color: #FFB060;
+  background: rgba(255, 160, 60, 0.08);
+  border: 1px solid rgba(255, 160, 60, 0.25);
+  border-radius: 20px;
+  padding: 3px 10px;
+}
+
+/* ═══════════════════════════════════
+   3D VIEWER (center column)
+   ═══════════════════════════════════ */
+.modal-3d-viewer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* The glow ring behind canvas */
+.dish-glow-ring {
+  position: absolute;
+  width: 460px;
+  height: 460px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle, rgba(201, 168, 76, 0.1) 0%, transparent 68%
+  );
+  pointer-events: none;
+  animation: dish-glow-pulse 3.5s ease-in-out infinite;
+  z-index: 0;
+}
+
+@keyframes dish-glow-pulse {
+  0%, 100% { opacity: 0.5; transform: scale(0.95); }
+  50%       { opacity: 1;   transform: scale(1.05); }
+}
+
+#dish-canvas {
+  position: relative;
+  z-index: 1;
+  border-radius: 50%;
+  display: block;
+}
+
+.viewer-controls {
+  margin-top: 0.8rem;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.drag-hint {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  opacity: 0.6;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  justify-content: center;
+}
+
+.drag-hint::before {
+  content: '';
+  display: inline-block;
+  width: 28px;
+  height: 1px;
+  background: rgba(201, 168, 76, 0.3);
+}
+
+.drag-hint::after {
+  content: '';
+  display: inline-block;
+  width: 28px;
+  height: 1px;
+  background: rgba(201, 168, 76, 0.3);
+}
+
+/* ═══════════════════════════════════
+   NUTRITION PANEL
+   ═══════════════════════════════════ */
+.nutrition-card {
+  border: 1px solid rgba(201, 168, 76, 0.12);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 0.8rem;
+}
+
+.nutrition-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 12px;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.07);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--color-ivory);
+  transition: background 0.15s ease;
+}
+
+.nutrition-row:last-child { border-bottom: none; }
+
+.nutrition-row:hover { background: rgba(201, 168, 76, 0.04); }
+
+.nutrition-row.highlight {
+  background: rgba(201, 168, 76, 0.06);
+  border-bottom: 1px solid rgba(201, 168, 76, 0.12);
+}
+
+.nutrition-row.highlight .value {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--color-gold);
+}
+
+.nutrition-row .value {
+  font-weight: 500;
+  color: var(--color-ivory);
+  text-align: right;
+}
+
+.nutrition-row .value.sub {
+  color: var(--color-muted);
+  font-size: 0.8rem;
+}
+
+.nutrition-row span:first-child {
+  color: var(--color-muted);
+}
+
+.nutrition-row span:first-child.indented {
+  padding-left: 0.8rem;
+  font-size: 0.8rem;
+}
+
+.nutrition-note {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  color: var(--color-muted);
+  opacity: 0.7;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+/* Optional multi-preparation note */
+.nutrition-multi-note {
+  margin-top: 0.8rem;
+  font-size: 0.72rem;
+  color: var(--color-muted);
+  font-style: italic;
+  line-height: 1.6;
+  padding: 0.5rem;
+  border-left: 2px solid rgba(201, 168, 76, 0.3);
+}
+
+/* ═══════════════════════════════════
+   FOOTER — Chef's Note + Reserve CTA
+   ═══════════════════════════════════ */
+.modal-footer {
+  padding: 1.5rem 2.5rem 2rem;
+  border-top: 1px solid rgba(201, 168, 76, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+  background: linear-gradient(180deg, transparent, rgba(59, 10, 10, 0.15));
+}
+
+.chef-note {
+  flex: 1;
+  min-width: 260px;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  color: var(--color-muted);
+  line-height: 1.75;
+  max-width: 640px;
+}
+
+.chef-note em {
+  color: var(--color-gold);
+  font-style: italic;
+  font-size: 1rem;
+}
+
+.btn-reserve-gold {
+  flex-shrink: 0;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-bg);
+  background: linear-gradient(135deg, var(--color-gold), var(--color-gold-light));
+  border: none;
+  padding: 0.85rem 1.8rem;
+  border-radius: 3px;
+  cursor: none;
+  text-decoration: none;
+  display: inline-block;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-reserve-gold::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--color-gold-light), var(--color-gold));
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.btn-reserve-gold:hover::before { opacity: 1; }
+
+.btn-reserve-gold:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(201, 168, 76, 0.45);
+}
+
+/* ═══════════════════════════════════
+   LOADING STATE
+   ═══════════════════════════════════ */
+.modal-3d-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  color: var(--color-muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  z-index: 2;
+}
+
+.modal-3d-loading .spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid rgba(201, 168, 76, 0.2);
+  border-top-color: var(--color-gold);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* ═══════════════════════════════════
+   ENTRANCE ANIMATIONS
+   ═══════════════════════════════════ */
+@keyframes modal-panel-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.dish-modal.is-open .modal-header {
+  animation: modal-panel-in 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.15s both;
+}
+
+.dish-modal.is-open .ingredients-panel {
+  animation: modal-panel-in 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.25s both;
+}
+
+.dish-modal.is-open .modal-3d-viewer {
+  animation: modal-panel-in 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s both;
+}
+
+.dish-modal.is-open .nutrition-panel {
+  animation: modal-panel-in 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.25s both;
+}
+
+.dish-modal.is-open .modal-footer {
+  animation: modal-panel-in 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s both;
+}
+
+/* ═══════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════ */
+@media (max-width: 1000px) {
+  .modal-body {
+    grid-template-columns: 1fr 340px 1fr;
+    gap: 1rem;
+    padding: 1.5rem 1.5rem 1rem;
+  }
+  .dish-glow-ring { width: 360px; height: 360px; }
+}
+
+@media (max-width: 860px) {
+  .modal-body {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .modal-3d-viewer {
+    order: -1;  /* 3D viewer goes first on mobile */
+    width: 100%;
+    height: 300px;
+  }
+
+  #dish-canvas {
+    width: 300px !important;
+    height: 300px !important;
+  }
+
+  .dish-glow-ring {
+    width: 320px;
+    height: 320px;
+  }
+
+  .modal-header {
+    padding: 2rem 1.5rem 1.2rem;
+  }
+
+  .modal-footer {
+    padding: 1.2rem 1.5rem 1.5rem;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .btn-reserve-gold { width: 100%; text-align: center; }
+}
+
+@media (max-width: 540px) {
+  .modal-container {
+    width: 98vw;
+    max-height: 96vh;
+    border-radius: 4px 4px 0 0;
+  }
+
+  .dish-modal {
+    align-items: flex-end;
+  }
+
+  .modal-container {
+    transform: translateY(100%) scale(1);
+  }
+
+  .dish-modal.is-open .modal-container {
+    transform: translateY(0) scale(1);
+  }
+
+  .modal-dish-name { font-size: 1.8rem; }
+  .modal-header   { padding: 1.5rem 1rem 1rem; }
+  .modal-body     { padding: 1rem; }
+  .modal-footer   { padding: 1rem; }
+
+  #dish-canvas {
+    width: 260px !important;
+    height: 260px !important;
+  }
+}

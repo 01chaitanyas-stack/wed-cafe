@@ -1,0 +1,507 @@
+/* ================================================
+   PANCHRATNA — HERO CSS
+   Full-screen hero, Three.js canvas, headline animation, CTA
+   ================================================ */
+
+/* ——— Hero Section ——— */
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Background image */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('../assets/images/hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: scale(1.05);
+  transition: transform 20s ease;
+  filter: brightness(0.35) saturate(0.8);
+}
+
+.hero:hover .hero-bg {
+  transform: scale(1.0);
+}
+
+/* Gradient overlays */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(13,4,3,0.3) 0%, rgba(13,4,3,0.1) 40%, rgba(13,4,3,0.7) 75%, var(--color-bg) 100%),
+    radial-gradient(ellipse at 50% 30%, rgba(59,10,10,0.4) 0%, transparent 70%);
+  z-index: 1;
+}
+
+/* Three.js Canvas */
+#hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Mobile static fallback — shows instead of canvas on small screens */
+.hero-canvas-fallback {
+  display: none;
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(201,168,76,0.15) 0%, transparent 70%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hero-canvas-fallback::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle 200px at 50% 40%, rgba(201,168,76,0.18) 0%, transparent 70%);
+  animation: mobile-glow 4s ease-in-out infinite alternate;
+}
+
+@keyframes mobile-glow {
+  from { opacity: 0.5; transform: scale(0.95); }
+  to   { opacity: 1;   transform: scale(1.05); }
+}
+
+/* Hero Content */
+.hero-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  max-width: 900px;
+  padding: 0 var(--space-md);
+  padding-top: var(--navbar-height);
+}
+
+/* Pre-title ornament */
+.hero-pretitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeInDown 1s ease 0.5s forwards;
+}
+
+.hero-pretitle-line {
+  flex: 1;
+  max-width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold));
+}
+
+.hero-pretitle-line:last-child {
+  background: linear-gradient(90deg, var(--color-gold), transparent);
+}
+
+.hero-pretitle span {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+/* Main Title */
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(4rem, 12vw, 9rem);
+  line-height: 0.9;
+  color: var(--color-ivory);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+  opacity: 0;
+  animation: fadeInUp 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 0.8s forwards;
+}
+
+.hero-title-em {
+  display: block;
+  color: var(--color-gold);
+  font-style: italic;
+}
+
+/* Subtitle */
+.hero-subtitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  font-style: italic;
+  color: var(--color-muted);
+  margin-bottom: var(--space-md);
+  opacity: 0;
+  animation: fadeInUp 1.2s cubic-bezier(0.25,0.46,0.45,0.94) 1.2s forwards;
+}
+
+/* Location tag */
+.hero-location {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: var(--space-md);
+  opacity: 0;
+  animation: fadeInUp 1.2s ease 1.5s forwards;
+}
+
+.hero-location svg {
+  color: var(--color-gold);
+  width: 14px;
+  height: 14px;
+}
+
+/* CTA group */
+.hero-cta {
+  display: flex;
+  gap: 1.2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeInUp 1.2s ease 1.8s forwards;
+}
+
+/* Scroll Indicator */
+.hero-scroll {
+  position: absolute;
+  bottom: var(--space-md);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0;
+  animation: fadeIn 1s ease 2.5s forwards;
+}
+
+.hero-scroll span {
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.scroll-mouse {
+  width: 22px;
+  height: 34px;
+  border: 1.5px solid var(--color-gold);
+  border-radius: 11px;
+  display: flex;
+  justify-content: center;
+  padding-top: 5px;
+}
+
+.scroll-mouse::before {
+  content: '';
+  width: 3px;
+  height: 7px;
+  background: var(--color-gold);
+  border-radius: 2px;
+  animation: scroll-wheel 2s ease infinite;
+}
+
+@keyframes scroll-wheel {
+  0%   { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(8px); }
+}
+
+/* ——— Keyframes ——— */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ——— Hero Stats Strip ——— */
+.hero-stats {
+  position: relative;
+  z-index: 5;
+  background: rgba(255,255,255,0.02);
+  border-top: 1px solid var(--color-glass-border);
+  border-bottom: 1px solid var(--color-glass-border);
+  backdrop-filter: blur(10px);
+}
+
+.hero-stats-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-md);
+  display: flex;
+  justify-content: center;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.hero-stat {
+  text-align: center;
+}
+
+.hero-stat-number {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--color-gold);
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+
+.hero-stat-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+/* ——— Section: About Preview (Homepage teaser) ——— */
+.section-about-preview {
+  padding: var(--space-xl) 0;
+  position: relative;
+}
+
+.about-preview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  align-items: center;
+}
+
+.about-preview-image {
+  position: relative;
+  height: 600px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.about-preview-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease;
+}
+
+.about-preview-image:hover img {
+  transform: scale(1.05);
+}
+
+.about-preview-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--radius-md);
+  pointer-events: none;
+}
+
+/* Gold frame corners */
+.about-preview-image::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(135deg, var(--color-gold), transparent 40%, transparent 60%, var(--color-gold));
+  border-radius: var(--radius-md);
+  z-index: -1;
+  opacity: 0.3;
+}
+
+.about-preview-text { padding: 0 var(--space-sm); }
+
+.about-preview-text .section-label { display: block; }
+
+.about-preview-text p {
+  color: var(--color-muted);
+  font-size: 1.05rem;
+  line-height: 1.9;
+  margin-bottom: var(--space-sm);
+}
+
+.about-preview-quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.3rem;
+  color: var(--color-ivory);
+  border-left: 2px solid var(--color-gold);
+  padding-left: var(--space-sm);
+  margin: var(--space-md) 0;
+  line-height: 1.6;
+}
+
+/* ——— Section: Menu Teaser ——— */
+.section-menu-teaser {
+  padding: var(--space-xl) 0;
+  background: linear-gradient(180deg, var(--color-bg) 0%, rgba(59,10,10,0.3) 50%, var(--color-bg) 100%);
+  position: relative;
+  text-align: center;
+}
+
+.menu-teaser-badge {
+  display: inline-block;
+  border: 1px solid var(--color-glass-border);
+  background: var(--color-glass);
+  backdrop-filter: blur(8px);
+  color: var(--color-gold);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-style: italic;
+  padding: 0.75rem 2rem;
+  border-radius: 40px;
+  margin-bottom: var(--space-md);
+}
+
+.menu-teaser-courses {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-lg);
+}
+
+.menu-course-pill {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  border: 1px solid rgba(201,168,76,0.15);
+  padding: 0.5rem 1.2rem;
+  border-radius: 20px;
+  transition: all var(--transition-fast);
+}
+
+.menu-course-pill:hover {
+  background: var(--color-glass);
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+}
+
+/* ——— Section: Gallery Strip ——— */
+.section-gallery-strip {
+  padding: var(--space-xl) 0;
+  overflow: hidden;
+}
+
+.gallery-strip-heading {
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.gallery-strip-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: 280px 280px;
+  gap: 6px;
+}
+
+.gallery-strip-item {
+  overflow: hidden;
+  position: relative;
+}
+
+.gallery-strip-item:first-child {
+  grid-row: span 2;
+}
+
+.gallery-strip-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.gallery-strip-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(13,4,3,0.4);
+  transition: opacity var(--transition-medium);
+}
+
+.gallery-strip-item:hover::after { opacity: 0.1; }
+.gallery-strip-item:hover img { transform: scale(1.08); }
+
+.gallery-strip-cta {
+  text-align: center;
+  margin-top: var(--space-md);
+}
+
+/* ——— Section: Reservation CTA ——— */
+.section-reservation-cta {
+  padding: var(--space-xl) 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.section-reservation-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(59,10,10,0.5) 0%, transparent 70%);
+}
+
+.reservation-cta-card {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+  margin: 0 auto;
+  border: 1px solid var(--color-glass-border);
+  background: var(--color-glass);
+  backdrop-filter: blur(16px);
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 0 60px rgba(201,168,76,0.1), inset 0 1px 0 rgba(201,168,76,0.15);
+}
+
+.reservation-cta-price {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 3vw, 1.3rem);
+  color: var(--color-muted);
+  margin-bottom: var(--space-sm);
+}
+
+.reservation-cta-price span {
+  color: var(--color-gold);
+  font-size: 1.1em;
+}
+
+/* ——— Responsive ——— */
+@media (max-width: 768px) {
+  #hero-canvas { display: none; }
+  .hero-canvas-fallback { display: block; }
+
+  .about-preview-grid { grid-template-columns: 1fr; }
+  .about-preview-image { height: 350px; }
+
+  .gallery-strip-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+  .gallery-strip-item:first-child { grid-row: span 1; }
+}
+
+@media (max-width: 480px) {
+  .gallery-strip-grid { grid-template-columns: 1fr; }
+  .hero-cta { flex-direction: column; align-items: center; }
+}

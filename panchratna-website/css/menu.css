@@ -1,0 +1,405 @@
+/* ================================================
+   PANCHRATNA — MENU CSS
+   Course headers, dish cards, allergen grid, pricing badge
+   ================================================ */
+
+/* ——— Menu Page Layout ——— */
+.menu-page {
+  min-height: 100vh;
+  padding-bottom: var(--space-xl);
+}
+
+/* ——— Pricing Badge ——— */
+.menu-pricing-badge {
+  position: relative;
+  max-width: 540px;
+  margin: calc(-3rem) auto var(--space-lg);
+  z-index: 10;
+  text-align: center;
+}
+
+.pricing-badge-inner {
+  display: inline-block;
+  background: linear-gradient(135deg, #1a0a00 0%, var(--color-primary) 100%);
+  border: 1px solid var(--color-gold);
+  border-radius: var(--radius-md);
+  padding: 1.5rem 3rem;
+  position: relative;
+  box-shadow:
+    0 0 0 1px rgba(201,168,76,0.1),
+    0 20px 60px rgba(0,0,0,0.6),
+    inset 0 1px 0 rgba(201,168,76,0.2);
+}
+
+/* Mandala corner ornaments */
+.pricing-badge-inner::before,
+.pricing-badge-inner::after {
+  content: '✦';
+  position: absolute;
+  color: var(--color-gold);
+  font-size: 1rem;
+  opacity: 0.5;
+}
+
+.pricing-badge-inner::before { top: 8px; left: 12px; }
+.pricing-badge-inner::after  { bottom: 8px; right: 12px; }
+
+.badge-corner-br,
+.badge-corner-tl {
+  position: absolute;
+  color: var(--color-gold);
+  font-size: 1rem;
+  opacity: 0.5;
+}
+
+.badge-corner-tl { top: 8px; right: 12px; }
+.badge-corner-br { bottom: 8px; left: 12px; }
+
+.badge-label {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.badge-price {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--color-gold);
+  line-height: 1;
+  display: block;
+}
+
+.badge-sub {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--color-muted);
+  display: block;
+  margin-top: 0.4rem;
+}
+
+/* ——— Course Section ——— */
+.menu-section { padding: var(--space-lg) 0; }
+
+.menu-section:not(:last-of-type) {
+  border-bottom: 1px solid rgba(201,168,76,0.08);
+}
+
+.course-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.course-number {
+  font-family: var(--font-display);
+  font-size: 4rem;
+  font-weight: 700;
+  color: rgba(201,168,76,0.1);
+  line-height: 1;
+  user-select: none;
+  min-width: 70px;
+}
+
+.course-title {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.course-name {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 700;
+  color: var(--color-ivory);
+  line-height: 1.1;
+}
+
+.course-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-glass-border), transparent);
+}
+
+/* ——— Dish Cards Grid ——— */
+.dish-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--space-md);
+}
+
+/* Breads get a wider grid */
+.dish-cards-grid.breads-grid {
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+
+/* ——— Individual Dish Card ——— */
+.dish-card {
+  background: linear-gradient(145deg, rgba(59,10,10,0.3) 0%, rgba(13,4,3,0.8) 100%);
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: box-shadow 0.4s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.dish-card:hover {
+  box-shadow: 0 20px 60px rgba(201,168,76,0.35);
+}
+
+.dish-card-image {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  position: relative;
+}
+
+.dish-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.dish-card:hover .dish-card-image img {
+  transform: scale(1.08);
+}
+
+/* Placeholder gradient for missing dish images */
+.dish-img-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  color: var(--color-gold);
+  opacity: 0.5;
+  letter-spacing: 0.1em;
+}
+
+.dish-card-body {
+  padding: 1.4rem;
+}
+
+.dish-card-name {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--color-ivory);
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.dish-card-desc {
+  font-size: 0.82rem;
+  color: var(--color-muted);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.dish-card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(201,168,76,0.1);
+  padding-top: 0.8rem;
+}
+
+.dish-weight {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  color: var(--color-muted);
+  letter-spacing: 0.05em;
+}
+
+.dish-kcal {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  color: var(--color-gold);
+  background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.15);
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  letter-spacing: 0.05em;
+}
+
+/* Compact dish row (for breads) */
+.dish-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.2rem;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--radius-sm);
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.dish-row:hover {
+  background: var(--color-glass);
+  border-color: rgba(201,168,76,0.3);
+}
+
+.dish-row-left {}
+
+.dish-row-name {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-ivory);
+}
+
+.dish-row-desc {
+  font-size: 0.78rem;
+  color: var(--color-muted);
+  margin-top: 0.2rem;
+}
+
+.dish-row-right {
+  text-align: right;
+  flex-shrink: 0;
+  margin-left: 1rem;
+}
+
+/* ——— Menu Note ——— */
+.menu-note-box {
+  margin-top: var(--space-lg);
+  background: var(--color-glass);
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.menu-note-box p {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+/* ——— Allergen Section ——— */
+.allergen-section {
+  padding: var(--space-xl) 0;
+  background: linear-gradient(180deg, transparent, rgba(59,10,10,0.2) 50%, transparent);
+}
+
+.allergen-heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 700;
+  color: var(--color-ivory);
+  text-align: center;
+  margin-bottom: var(--space-md);
+}
+
+.allergen-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  margin-bottom: var(--space-md);
+}
+
+.allergen-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1.2rem;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+
+.allergen-item:hover {
+  background: var(--color-glass);
+  border-color: rgba(201,168,76,0.3);
+  transform: translateY(-4px);
+}
+
+.allergen-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.allergen-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  text-align: center;
+}
+
+.allergen-footer-note {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto;
+  font-size: 0.82rem;
+  color: var(--color-muted);
+  line-height: 1.9;
+}
+
+.allergen-footer-note p + p { margin-top: 0.5rem; }
+
+/* ——— Course Tab Filter ——— */
+.course-filter-bar {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: var(--space-lg);
+  padding: 0 var(--space-md);
+}
+
+.course-filter-btn {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--color-glass-border);
+  padding: 0.55rem 1.2rem;
+  border-radius: 20px;
+  cursor: none;
+  transition: all var(--transition-fast);
+}
+
+.course-filter-btn:hover,
+.course-filter-btn.active {
+  color: var(--color-bg);
+  background: var(--color-gold);
+  border-color: var(--color-gold);
+}
+
+/* ——— Responsive ——— */
+@media (max-width: 768px) {
+  .allergen-grid { grid-template-columns: repeat(3, 1fr); }
+  .dish-cards-grid { grid-template-columns: 1fr; }
+  .menu-pricing-badge { margin-top: 0; }
+}
+
+@media (max-width: 480px) {
+  .allergen-grid { grid-template-columns: repeat(2, 1fr); }
+  .course-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+  .course-number { font-size: 2.5rem; }
+}

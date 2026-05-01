@@ -1,0 +1,377 @@
+/* ================================================
+   PANCHRATNA — RESERVATIONS CSS
+   Glassmorphism booking card, form styles, validation
+   ================================================ */
+
+/* ——— Reservations Page ——— */
+.reservations-page {
+  min-height: 100vh;
+  padding-bottom: var(--space-xl);
+  position: relative;
+}
+
+.reservations-page::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 20%, rgba(59,10,10,0.3) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* ——— Booking Card ——— */
+.booking-card {
+  max-width: 820px;
+  margin: 0 auto;
+  background: linear-gradient(145deg,
+    rgba(255,255,255,0.04) 0%,
+    rgba(201,168,76,0.04) 100%
+  );
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow:
+    0 0 0 1px rgba(201,168,76,0.06),
+    0 40px 80px rgba(0,0,0,0.5),
+    inset 0 1px 0 rgba(201,168,76,0.15),
+    inset 0 -1px 0 rgba(0,0,0,0.2);
+  position: relative;
+}
+
+.booking-card::before {
+  content: '';
+  position: absolute;
+  top: -1px; left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+}
+
+.booking-card-header {
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.booking-card-header h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--color-ivory);
+  margin-bottom: 0.5rem;
+}
+
+.booking-card-header h2 em { color: var(--color-gold); font-style: italic; }
+
+.booking-card-subtitle {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  letter-spacing: 0.05em;
+}
+
+/* ——— Form ——— */
+.booking-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group.full-width { grid-column: 1 / -1; }
+
+.form-label {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.form-label span.required { color: var(--color-gold); margin-left: 2px; }
+
+/* Inputs */
+.form-input,
+.form-select,
+.form-textarea {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: var(--radius-sm);
+  color: var(--color-ivory);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  padding: 0.85rem 1rem;
+  transition: border-color var(--transition-fast), background var(--transition-fast), box-shadow var(--transition-fast);
+  width: 100%;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: var(--color-gold);
+  background: rgba(201,168,76,0.06);
+  box-shadow: 0 0 0 3px rgba(201,168,76,0.1), 0 4px 20px rgba(201,168,76,0.1);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: rgba(168,144,112,0.5);
+}
+
+/* Date input color fix */
+.form-input[type="date"],
+.form-input[type="time"] {
+  color-scheme: dark;
+}
+
+/* Select arrow */
+.form-select-wrapper {
+  position: relative;
+}
+
+.form-select-wrapper::after {
+  content: '';
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid var(--color-gold);
+  pointer-events: none;
+}
+
+.form-select { cursor: none; }
+.form-select option { background: #1a0a00; color: var(--color-ivory); }
+
+.form-textarea { resize: vertical; min-height: 100px; }
+
+/* Party size selector */
+.party-size-selector {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.party-size-btn {
+  flex: 1;
+  min-width: 44px;
+  height: 44px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: var(--radius-sm);
+  color: var(--color-muted);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  cursor: none;
+  transition: all var(--transition-fast);
+}
+
+.party-size-btn:hover,
+.party-size-btn.selected {
+  background: var(--color-gold);
+  border-color: var(--color-gold);
+  color: var(--color-bg);
+  font-weight: 500;
+}
+
+/* Checkbox */
+.form-checkbox-group {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.form-checkbox {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  accent-color: var(--color-gold);
+  cursor: none;
+}
+
+.form-checkbox-label {
+  font-size: 0.83rem;
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+
+.form-checkbox-label a { color: var(--color-gold); text-decoration: underline; }
+
+/* Validation states */
+.form-group.error .form-input,
+.form-group.error .form-select,
+.form-group.error .form-textarea {
+  border-color: #c0392b;
+  box-shadow: 0 0 0 2px rgba(192,57,43,0.2);
+}
+
+.form-group.success .form-input,
+.form-group.success .form-select {
+  border-color: #27ae60;
+  box-shadow: 0 0 0 2px rgba(39,174,96,0.15);
+}
+
+.form-error-msg {
+  font-size: 0.75rem;
+  color: #e74c3c;
+  display: none;
+}
+
+.form-group.error .form-error-msg { display: block; }
+
+/* Submit button area */
+.booking-submit-area {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.booking-submit-area .btn-primary {
+  width: 100%;
+  justify-content: center;
+  padding: 1.1rem 2rem;
+  font-size: 0.85rem;
+}
+
+.booking-submit-note {
+  font-size: 0.78rem;
+  color: var(--color-muted);
+  text-align: center;
+}
+
+/* ——— Toast Notification ——— */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 10001;
+  background: linear-gradient(135deg, rgba(13,4,3,0.97), rgba(59,10,10,0.97));
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--radius-md);
+  padding: 1.2rem 1.5rem;
+  min-width: 300px;
+  max-width: 420px;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  backdrop-filter: blur(16px);
+  transform: translateY(20px);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+
+.toast.show {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: all;
+}
+
+.toast-icon {
+  width: 36px;
+  height: 36px;
+  background: rgba(201,168,76,0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--color-gold);
+}
+
+.toast-body {}
+
+.toast-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-ivory);
+  margin-bottom: 0.25rem;
+}
+
+.toast-message {
+  font-size: 0.82rem;
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+
+/* ——— Info Sidebar ——— */
+.reservations-layout {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: var(--space-lg);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+.reservations-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.sidebar-card {
+  background: var(--color-glass);
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+}
+
+.sidebar-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-gold);
+  margin-bottom: 1rem;
+}
+
+.sidebar-card p,
+.sidebar-card li {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  line-height: 1.8;
+}
+
+.sidebar-card ul li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.sidebar-card ul li::before {
+  content: '◆';
+  color: var(--color-gold);
+  font-size: 0.5rem;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+
+/* ——— Responsive ——— */
+@media (max-width: 900px) {
+  .reservations-layout { grid-template-columns: 1fr; }
+  .reservations-sidebar { order: -1; }
+}
+
+@media (max-width: 600px) {
+  .booking-form { grid-template-columns: 1fr; }
+  .booking-card { padding: var(--space-md); }
+  .toast { min-width: auto; right: 1rem; left: 1rem; }
+}

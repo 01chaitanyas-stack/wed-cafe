@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panchratna — Fine Dining in Nashik, Maharashtra</title>
+  <meta name="description" content="Panchratna offers an unparalleled vegetarian fine dining experience in Nashik, Maharashtra. Savour the ₹3,000 Chef's Tasting Menu — where Mughal opulence meets modern luxury.">
+  <meta name="keywords" content="Panchratna, fine dining Nashik, vegetarian restaurant Maharashtra, luxury Indian restaurant, tasting menu">
+  <meta property="og:title" content="Panchratna — Fine Dining, Nashik">
+  <meta property="og:description" content="Where Every Meal Tells a Story. Experience the ₹3,000 Chef's Vegetarian Tasting Menu.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon">
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/hero.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+
+<!-- ═══ CUSTOM CURSOR ═══ -->
+<div id="cursor-orb"></div>
+<div id="cursor-ring"></div>
+
+<!-- ═══ NAVBAR ═══ -->
+<nav class="navbar" id="navbar" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="Panchratna Home">
+      <img src="assets/images/logo.svg" alt="Panchratna mandala emblem" class="nav-logo-emblem">
+      <div>
+        <span class="nav-logo-text">Panchratna</span>
+        <span class="nav-logo-sub">Nashik, Maharashtra</span>
+      </div>
+    </a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="index.html"            class="nav-link active">Home</a></li>
+      <li><a href="pages/about.html"      class="nav-link">Our Story</a></li>
+      <li><a href="pages/menu.html"       class="nav-link">Menu</a></li>
+      <li><a href="pages/gallery.html"    class="nav-link">Gallery</a></li>
+      <li><a href="pages/reservations.html" class="nav-link">Reservations</a></li>
+    </ul>
+
+    <a href="pages/reservations.html" class="btn-reserve-nav">Reserve a Table</a>
+
+    <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="nav-mobile-menu" id="mobile-menu" role="dialog" aria-modal="true">
+  <a href="index.html"              class="nav-link">Home</a>
+  <a href="pages/about.html"        class="nav-link">Our Story</a>
+  <a href="pages/menu.html"         class="nav-link">Menu</a>
+  <a href="pages/gallery.html"      class="nav-link">Gallery</a>
+  <a href="pages/reservations.html" class="nav-link">Reservations</a>
+  <a href="pages/reservations.html" class="btn-primary" style="margin-top:1rem;">Reserve a Table</a>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="hero" aria-label="Hero section">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-overlay" aria-hidden="true"></div>
+
+  <!-- Three.js Canvas -->
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+
+  <!-- Mobile fallback -->
+  <div class="hero-canvas-fallback" aria-hidden="true"></div>
+
+  <div class="hero-content">
+    <div class="hero-pretitle" aria-hidden="true">
+      <div class="hero-pretitle-line"></div>
+      <span>Est. in Nashik, Maharashtra</span>
+      <div class="hero-pretitle-line"></div>
+    </div>
+
+    <h1 class="hero-title">
+      Panchratna
+      <em class="hero-title-em">Fine Dining</em>
+    </h1>
+
+    <p class="hero-subtitle">Where Every Meal Tells a Story</p>
+
+    <div class="hero-location" aria-label="Location: Nashik, Maharashtra, India">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+        <circle cx="12" cy="10" r="3"/>
+      </svg>
+      Nashik, Maharashtra, India
+    </div>
+
+    <div class="hero-cta">
+      <a href="pages/reservations.html" class="btn-primary" id="hero-reserve-btn">
+        Reserve a Table
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+      <a href="pages/menu.html" class="btn-secondary" id="hero-menu-btn">
+        View Chef's Menu
+      </a>
+    </div>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="hero-scroll" aria-hidden="true">
+    <div class="scroll-mouse"></div>
+    <span>Scroll to explore</span>
+  </div>
+</section>
+
+<!-- ═══ STATS STRIP ═══ -->
+<div class="hero-stats" aria-label="Restaurant highlights">
+  <div class="hero-stats-inner">
+    <div class="hero-stat">
+      <div class="hero-stat-number" id="stat-courses">5</div>
+      <div class="hero-stat-label">Tasting Courses</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-number" id="stat-price">₹3,000</div>
+      <div class="hero-stat-label">Per Person</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-number" id="stat-dishes">18+</div>
+      <div class="hero-stat-label">Curated Dishes</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-number" id="stat-years">100%</div>
+      <div class="hero-stat-label">Vegetarian</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ABOUT PREVIEW ═══ -->
+<section class="section-about-preview" id="about-preview" aria-labelledby="about-heading">
+  <div class="container">
+    <div class="about-preview-grid">
+      <div class="about-preview-image">
+        <img src="assets/images/about-arch.jpg" alt="Ornate heritage archway at Panchratna" loading="lazy">
+      </div>
+      <div class="about-preview-text">
+        <span class="section-label">Our Heritage</span>
+        <h2 class="section-heading" id="about-heading">
+          Rooted in <em>Nashik's</em> Royal Soul
+        </h2>
+        <div class="gold-divider left"></div>
+        <p>Nestled at the heart of Maharashtra's wine capital, Panchratna is more than a restaurant — it is a living testament to the grandeur of Indian culinary tradition. Born where the sacred Godavari meets the rolling vineyards, our kitchen draws from centuries of Mughal court recipes and the vibrant spice routes of the Deccan.</p>
+        <blockquote class="about-preview-quote">
+          "Every plate is a canvas, every spice a brushstroke — painted with the soul of Nashik."
+        </blockquote>
+        <p>From the arches of Trimbakeshwar to the terraced estates of Sula, our identity is woven from the spiritual calm and royal heritage of this extraordinary city.</p>
+        <a href="pages/about.html" class="btn-secondary" style="margin-top:1.5rem;" id="about-read-more-btn">
+          Read Our Story
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Ornament Separator -->
+<div class="ornament-separator" aria-hidden="true">
+  <div class="ornament-separator-gem">✦ ✦ ✦</div>
+</div>
+
+<!-- ═══ MENU TEASER ═══ -->
+<section class="section-menu-teaser" id="menu-teaser" aria-labelledby="menu-teaser-heading">
+  <div class="container">
+    <span class="section-label">Chef's Table</span>
+    <h2 class="section-heading" id="menu-teaser-heading">
+      A <em>Vegetarian</em> Tasting Journey
+    </h2>
+    <div class="gold-divider"></div>
+
+    <div class="menu-teaser-badge" role="complementary" aria-label="Tasting menu price">
+      🌿 Chef's Tasting Menu — ₹3,000 per person
+    </div>
+
+    <div class="menu-teaser-courses" role="list" aria-label="Menu courses">
+      <div class="menu-course-pill" role="listitem">🍲 Soup</div>
+      <div class="menu-course-pill" role="listitem">🌿 Appetizer</div>
+      <div class="menu-course-pill" role="listitem">🍛 Main Course</div>
+      <div class="menu-course-pill" role="listitem">🫓 Breads</div>
+      <div class="menu-course-pill" role="listitem">🍮 Dessert</div>
+    </div>
+
+    <p style="color:var(--color-muted);font-size:0.9rem;margin-bottom:var(--space-md);max-width:560px;margin-left:auto;margin-right:auto;">
+      From the warmth of <em style="color:var(--color-ivory);">Dal Palak Hing Shorba</em> to the silk of <em style="color:var(--color-ivory);">Khubani ka Meetha</em> — five courses, eighteen masterpieces, one unforgettable evening.
+    </p>
+
+    <a href="pages/menu.html" class="btn-primary" id="menu-view-btn">
+      Explore Full Menu
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<!-- ═══ GALLERY STRIP ═══ -->
+<section class="section-gallery-strip" id="gallery-strip" aria-labelledby="gallery-heading">
+  <div class="container">
+    <div class="gallery-strip-heading">
+      <span class="section-label">Visual Journey</span>
+      <h2 class="section-heading" id="gallery-heading">Inside <em>Panchratna</em></h2>
+      <div class="gold-divider"></div>
+    </div>
+
+    <div class="gallery-strip-grid" role="list">
+      <div class="gallery-strip-item" role="listitem">
+        <img src="assets/images/gallery/food-spread.jpg" alt="Overhead view of Panchratna's tasting feast" loading="lazy">
+      </div>
+      <div class="gallery-strip-item" role="listitem">
+        <img src="assets/images/gallery/ambiance-1.jpg" alt="Candlelit dining room at Panchratna" loading="lazy">
+      </div>
+      <div class="gallery-strip-item" role="listitem">
+        <img src="assets/images/gallery/ambiance-2.jpg" alt="Luxury table setting close-up" loading="lazy">
+      </div>
+      <div class="gallery-strip-item" role="listitem">
+        <img src="assets/images/gallery/nashik-view.jpg" alt="Nashik vineyard at twilight" loading="lazy">
+      </div>
+    </div>
+
+    <div class="gallery-strip-cta">
+      <a href="pages/gallery.html" class="btn-secondary" id="gallery-view-btn">
+        View Full Gallery
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Ornament -->
+<div class="ornament-separator" aria-hidden="true">
+  <div class="ornament-separator-gem">◆ ◆ ◆</div>
+</div>
+
+<!-- ═══ RESERVATION CTA ═══ -->
+<section class="section-reservation-cta" id="reservation-cta" aria-labelledby="cta-heading">
+  <div class="container">
+    <div class="reservation-cta-card">
+      <span class="section-label" style="display:block;text-align:center;">Reserve Your Evening</span>
+      <h2 class="section-heading" style="text-align:center;" id="cta-heading">
+        Begin Your <em>Story</em>
+      </h2>
+      <div class="gold-divider"></div>
+      <p class="reservation-cta-price">
+        Experience the <span>Chef's Vegetarian Tasting Menu — ₹3,000 per person</span>
+      </p>
+      <p style="color:var(--color-muted);font-size:0.85rem;margin-bottom:var(--space-md);">
+        Tables are limited. Reservations recommended 24 hours in advance.
+      </p>
+      <a href="pages/reservations.html" class="btn-primary" id="cta-reserve-btn">
+        Reserve a Table
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer" id="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <!-- Brand -->
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="margin-bottom:1.2rem;">
+          <img src="assets/images/logo.svg" alt="Panchratna" class="nav-logo-emblem">
+          <div>
+            <span class="nav-logo-text">Panchratna</span>
+            <span class="nav-logo-sub">Nashik, Maharashtra</span>
+          </div>
+        </a>
+        <p>Where Mughal grandeur meets the sacred soul of Nashik — a dining experience beyond the ordinary.</p>
+        <p style="margin-top:1rem;font-style:italic;color:var(--color-gold);font-family:var(--font-display);">"Where Every Meal Tells a Story"</p>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="footer-col" aria-label="Footer navigation">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="pages/about.html">Our Story</a></li>
+          <li><a href="pages/menu.html">Chef's Menu</a></li>
+          <li><a href="pages/gallery.html">Gallery</a></li>
+          <li><a href="pages/reservations.html">Reservations</a></li>
+        </ul>
+      </nav>
+
+      <!-- Menu quick links -->
+      <div class="footer-col">
+        <h4>The Menu</h4>
+        <ul>
+          <li><a href="pages/menu.html#course-soup">Soup</a></li>
+          <li><a href="pages/menu.html#course-appetizer">Appetizer</a></li>
+          <li><a href="pages/menu.html#course-main">Main Course</a></li>
+          <li><a href="pages/menu.html#course-breads">Breads</a></li>
+          <li><a href="pages/menu.html#course-dessert">Dessert</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div class="footer-col">
+        <h4>Visit Us</h4>
+        <div class="footer-contact-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Nashik, Maharashtra 422001, India</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span>+91 253 XXX XXXX</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span>dining@panchratna.in</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>Lunch: 12:00 – 15:30<br>Dinner: 19:00 – 23:00</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 Panchratna Fine Dining, Nashik. All rights reserved.</p>
+      <span class="footer-tagline">Where Every Meal Tells a Story</span>
+      <p>All prices subject to applicable government taxes.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══ SCRIPTS ═══ -->
+<script src="lib/three.min.js"></script>
+<script src="lib/gsap.min.js"></script>
+<script src="lib/ScrollTrigger.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/hero-3d.js"></script>
+<script src="js/animations.js"></script>
+
+</body>
+</html>

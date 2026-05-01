@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Story — Panchratna, The Heart of Nashik</title>
+  <meta name="description" content="Discover the heritage story of Panchratna — born at the confluence of Nashik's sacred Godavari, ancient Mughal culinary tradition, and Maharashtra's wine country.">
+  <link rel="icon" href="../assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <style>
+    /* ——— About Page Specific Styles ——— */
+    .about-page { min-height: 100vh; padding-bottom: var(--space-xl); }
+
+    /* Heritage Section */
+    .about-heritage {
+      padding: var(--space-xl) 0;
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-lg);
+      align-items: center;
+      margin-bottom: var(--space-xl);
+    }
+    .about-grid.reverse { direction: rtl; }
+    .about-grid.reverse > * { direction: ltr; }
+
+    .about-image {
+      height: 520px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      position: relative;
+    }
+    .about-image img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+    .about-image:hover img { transform: scale(1.04); }
+    .about-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid var(--color-glass-border);
+      border-radius: var(--radius-md);
+      pointer-events: none;
+    }
+
+    .about-text { padding: 0 var(--space-sm); }
+    .about-text p {
+      color: var(--color-muted);
+      font-size: 1rem;
+      line-height: 1.95;
+      margin-bottom: 1.2rem;
+    }
+    .about-text p strong { color: var(--color-ivory); }
+
+    /* Heritage Pillars */
+    .heritage-pillars {
+      padding: var(--space-xl) 0;
+      background: linear-gradient(180deg, transparent, rgba(59,10,10,0.15) 50%, transparent);
+      text-align: center;
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-md);
+      margin-top: var(--space-lg);
+    }
+
+    .pillar-card {
+      background: var(--color-glass);
+      border: 1px solid var(--color-glass-border);
+      border-radius: var(--radius-md);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      transition: all var(--transition-medium);
+    }
+    .pillar-card:hover {
+      background: rgba(201,168,76,0.1);
+      border-color: rgba(201,168,76,0.4);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(201,168,76,0.15);
+    }
+    .pillar-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .pillar-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--color-gold);
+      margin-bottom: 0.6rem;
+    }
+    .pillar-desc {
+      color: var(--color-muted);
+      font-size: 0.88rem;
+      line-height: 1.8;
+    }
+
+    /* Nashik Story Section */
+    .nashik-section {
+      padding: var(--space-xl) 0;
+    }
+    .nashik-section-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .nashik-section-inner p {
+      color: var(--color-muted);
+      font-size: 1.05rem;
+      line-height: 2;
+      margin-bottom: 1.5rem;
+    }
+    .nashik-quote {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-style: italic;
+      color: var(--color-ivory);
+      border-left: 2px solid var(--color-gold);
+      border-right: 2px solid var(--color-gold);
+      padding: 1.5rem 2rem;
+      margin: var(--space-md) 0;
+      line-height: 1.5;
+      background: var(--color-glass);
+      border-radius: var(--radius-md);
+    }
+
+    /* Nashik highlights */
+    .nashik-highlights {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+      margin: var(--space-md) 0;
+    }
+    .nashik-hl {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .nashik-hl-icon { font-size: 1.8rem; }
+    .nashik-hl-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+    }
+
+    /* Team / Chef section */
+    .chef-section {
+      padding: var(--space-xl) 0;
+      text-align: center;
+    }
+    .chef-card {
+      max-width: 520px;
+      margin: var(--space-lg) auto 0;
+      background: var(--color-glass);
+      border: 1px solid var(--color-glass-border);
+      border-radius: var(--radius-md);
+      padding: 2.5rem;
+    }
+    .chef-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-bg));
+      border: 2px solid var(--color-gold);
+      margin: 0 auto 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+    }
+    .chef-name {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-gold);
+      margin-bottom: 0.3rem;
+    }
+    .chef-title {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: 1rem;
+    }
+    .chef-bio {
+      color: var(--color-muted);
+      font-size: 0.88rem;
+      line-height: 1.85;
+      font-style: italic;
+      font-family: var(--font-display);
+    }
+
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .about-grid.reverse { direction: ltr; }
+      .about-image { height: 320px; }
+      .pillars-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="cursor-orb"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <img src="../assets/images/logo.svg" alt="Panchratna" class="nav-logo-emblem">
+      <div><span class="nav-logo-text">Panchratna</span><span class="nav-logo-sub">Nashik, Maharashtra</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html"     class="nav-link">Home</a></li>
+      <li><a href="about.html"        class="nav-link active">Our Story</a></li>
+      <li><a href="menu.html"         class="nav-link">Menu</a></li>
+      <li><a href="gallery.html"      class="nav-link">Gallery</a></li>
+      <li><a href="reservations.html" class="nav-link">Reservations</a></li>
+    </ul>
+    <a href="reservations.html" class="btn-reserve-nav">Reserve a Table</a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-mobile-menu" id="mobile-menu">
+  <a href="../index.html"   class="nav-link">Home</a>
+  <a href="about.html"      class="nav-link">Our Story</a>
+  <a href="menu.html"       class="nav-link">Menu</a>
+  <a href="gallery.html"    class="nav-link">Gallery</a>
+  <a href="reservations.html" class="nav-link">Reservations</a>
+  <a href="reservations.html" class="btn-primary" style="margin-top:1rem;">Reserve a Table</a>
+</div>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <div class="page-header-content">
+    <span class="section-label">Our Heritage</span>
+    <h1>Our <em>Story</em></h1>
+    <div class="gold-divider"></div>
+    <p style="color:var(--color-muted);font-family:var(--font-display);font-style:italic;font-size:1.1rem;margin-top:0.5rem;">
+      Born at the confluence of history, spirit & flavour
+    </p>
+  </div>
+</header>
+
+<main class="about-page" id="main-content">
+
+  <!-- Heritage Section -->
+  <section class="about-heritage" aria-labelledby="heritage-heading">
+    <div class="container">
+
+      <!-- Story block 1 -->
+      <div class="about-grid">
+        <div class="about-image">
+          <img src="../assets/images/about-arch.jpg" alt="Heritage archway at Panchratna" loading="lazy">
+        </div>
+        <div class="about-text">
+          <span class="section-label">The Beginning</span>
+          <h2 class="section-heading" id="heritage-heading">
+            A Palace of <em>Flavour</em>
+          </h2>
+          <div class="gold-divider left"></div>
+          <p>Panchratna — Sanskrit for <strong>"Five Jewels"</strong> — was conceived as a celebration of India's most royal culinary tradition. Five courses. Five jewels. One transcendent evening.</p>
+          <p>Founded with the vision of preserving and elevating the grandeur of Mughal vegetarian cuisine, our kitchen follows recipes that trace their lineage through the royal kitchens of the Mughal court — adapted for the modern palate, yet faithful to the spirit of centuries past.</p>
+          <p>Every herb is sourced locally from Nashik's fertile lands. Every spice is hand-selected from trusted estates. Every dish carries the weight of a story.</p>
+        </div>
+      </div>
+
+      <!-- Story block 2 (reversed) -->
+      <div class="about-grid reverse">
+        <div class="about-image">
+          <img src="../assets/images/gallery/nashik-view.jpg" alt="Nashik vineyards at twilight" loading="lazy">
+        </div>
+        <div class="about-text">
+          <span class="section-label">The Place</span>
+          <h2 class="section-heading">
+            Nashik — <em>Sacred</em> & Sublime
+          </h2>
+          <div class="gold-divider left"></div>
+          <p>We are rooted in <strong>Nashik</strong> — Maharashtra's wine capital, pilgrimage hub, and one of India's most spiritually vibrant cities. Home to the Godavari's sacred banks, the ancient Trimbakeshwar Shiva Temple, and rolling vineyard estates, Nashik carries a rare duality: the sacred and the sensual.</p>
+          <p>Panchratna was born to embody this duality. We honour the spiritual tradition of pure vegetarian cuisine while drawing aesthetic inspiration from the opulent vineyard culture that has made Nashik a destination for the discerning.</p>
+          <p>Our dining room offers vineyard vistas in the evening light — a reminder that great food, like great wine, is born from patience, land, and love.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Nashik Deep Dive -->
+  <section class="nashik-section" aria-labelledby="nashik-heading">
+    <div class="container">
+      <div class="nashik-section-inner">
+        <span class="section-label">The City of Stories</span>
+        <h2 class="section-heading" id="nashik-heading">
+          The <em>Soul</em> of Nashik
+        </h2>
+        <div class="gold-divider"></div>
+
+        <div class="nashik-highlights" aria-label="Nashik highlights">
+          <div class="nashik-hl"><span class="nashik-hl-icon">🍷</span><span class="nashik-hl-label">Wine Country</span></div>
+          <div class="nashik-hl"><span class="nashik-hl-icon">🕉️</span><span class="nashik-hl-label">Sacred City</span></div>
+          <div class="nashik-hl"><span class="nashik-hl-icon">🌊</span><span class="nashik-hl-label">Godavari Ghats</span></div>
+          <div class="nashik-hl"><span class="nashik-hl-icon">🏛️</span><span class="nashik-hl-label">Royal Heritage</span></div>
+          <div class="nashik-hl"><span class="nashik-hl-icon">🌿</span><span class="nashik-hl-label">Organic Farms</span></div>
+        </div>
+
+        <blockquote class="nashik-quote">
+          "Nashik does not merely feed you — it nourishes your very soul. And it is in this spirit that Panchratna serves."
+        </blockquote>
+
+        <p>The Kumbh Mela, held here on the banks of the Godavari, draws millions who seek spiritual renewal. The same river that sanctifies also irrigates the vine rows from which Nashik's celebrated wines emerge. Panchratna is the intersection of these two worlds — the meditative and the magnificent.</p>
+
+        <p>Our chefs draw from the <strong>Deccan spice routes</strong>, the <strong>Mughal court records</strong>, and the <strong>seasonal bounty of Maharashtra's farms</strong> to craft dishes that feel both deeply rooted and utterly contemporary.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Heritage Pillars -->
+  <section class="heritage-pillars" aria-labelledby="pillars-heading">
+    <div class="container">
+      <span class="section-label" style="display:block;">Our Foundations</span>
+      <h2 class="section-heading" id="pillars-heading">Three <em>Pillars</em> of Panchratna</h2>
+      <div class="gold-divider"></div>
+
+      <div class="pillars-grid">
+        <div class="pillar-card reveal-up">
+          <span class="pillar-icon">👑</span>
+          <div class="pillar-title">Royal Tradition</div>
+          <p class="pillar-desc">Our recipes trace their lineage to the Mughal kitchens of Awadh and Kashmir — adapted through generations of master cooks who valued patience and precision above all else.</p>
+        </div>
+        <div class="pillar-card reveal-up delay-200">
+          <span class="pillar-icon">🌱</span>
+          <div class="pillar-title">Pure Vegetarian</div>
+          <p class="pillar-desc">We celebrate the complete beauty of vegetarian cuisine — proving that restraint and richness are not opposites but two sides of the same extraordinary coin.</p>
+        </div>
+        <div class="pillar-card reveal-up delay-400">
+          <span class="pillar-icon">🏙️</span>
+          <div class="pillar-title">Nashik's Identity</div>
+          <p class="pillar-desc">We are inseparable from Nashik — its vineyards, its ghats, its ancient temples, and its modern ambition. The city's essence flows through every dish we serve.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chef Section -->
+  <section class="chef-section" aria-labelledby="chef-heading">
+    <div class="container">
+      <span class="section-label" style="display:block;">The Craftsmen</span>
+      <h2 class="section-heading" id="chef-heading">Our <em>Chef's</em> Vision</h2>
+      <div class="gold-divider"></div>
+      <div class="chef-card reveal-up">
+        <div class="chef-avatar" aria-hidden="true">👨‍🍳</div>
+        <div class="chef-name">Chef Aryan Mehta</div>
+        <div class="chef-title">Executive Chef · Panchratna</div>
+        <p class="chef-bio">"I grew up tasting the seasons in my grandmother's kitchen in Pune — the first rains in a bowl of soup, the summer in a glass of lassi. At Panchratna, I try to bottle that feeling. Not nostalgia alone — but a living, breathing memory of what Indian food can be when it is truly loved."</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="container" style="text-align:center;padding:var(--space-lg) 0;">
+    <span class="section-label" style="display:block;margin-bottom:1rem;">Experience It</span>
+    <a href="reservations.html" class="btn-primary" id="about-cta-btn">
+      Reserve Your Table
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="../index.html" class="nav-logo" style="margin-bottom:1.2rem;">
+          <img src="../assets/images/logo.svg" alt="Panchratna" class="nav-logo-emblem">
+          <div><span class="nav-logo-text">Panchratna</span><span class="nav-logo-sub">Nashik, Maharashtra</span></div>
+        </a>
+        <p>Where Mughal grandeur meets the sacred soul of Nashik.</p>
+      </div>
+      <nav class="footer-col" aria-label="Footer navigation">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="about.html">Our Story</a></li>
+          <li><a href="menu.html">Chef's Menu</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="reservations.html">Reservations</a></li>
+        </ul>
+      </nav>
+      <div class="footer-col">
+        <h4>Nashik</h4>
+        <ul>
+          <li><a href="#">Vineyard Views</a></li>
+          <li><a href="#">Godavari Ghats</a></li>
+          <li><a href="#">Trimbakeshwar</a></li>
+          <li><a href="#">Wine Country</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Visit Us</h4>
+        <div class="footer-contact-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Nashik, Maharashtra 422001</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>Lunch: 12:00 – 15:30<br>Dinner: 19:00 – 23:00</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Panchratna Fine Dining, Nashik. All rights reserved.</p>
+      <span class="footer-tagline">Where Every Meal Tells a Story</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../lib/gsap.min.js"></script>
+<script src="../lib/ScrollTrigger.min.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/animations.js"></script>
+
+</body>
+</html>
